@@ -4,7 +4,7 @@ const points = [
  {id:3,title:'클럽 옆 연결 골목',sub:'루체 측면 / 공원 방향',file:'03_club_park_alley_north.png',xy:[751,865],dir:'북',arrow:'↑',category:'CLUB SIDE ALLEY',desc:'루체 옆에서 공원 쪽으로 이어지는 연결 골목. 불투명한 클럽 외벽과 맞은편 소규모 상가가 마주합니다.',links:[1,4,6]},
  {id:4,title:'공원 북쪽 생활 골목',sub:'빌라촌 / 근린상가',file:'04_residential_commercial_alley_east.png',xy:[400,460],dir:'동',arrow:'→',category:'PARKSIDE LANE',desc:'공원과 빌라촌 사이의 평탄한 생활 골목. 주거지 출입구와 상가, 공원 경계를 함께 확인하세요.',links:[5,2,3]},
  {id:5,title:'빌라촌 안쪽 골목',sub:'다세대 주택 / 주차 공간',file:'05_villa_lane_west.png',xy:[665,318],dir:'서',arrow:'←',category:'RESIDENTIAL LANE',desc:'벽돌과 석재 외장 빌라가 이어지는 주거 골목. 소규모 주차 공간과 전선, 건물 사이 간격을 참고하세요.',links:[4]},
- {id:6,title:'루체 클럽 정문',sub:'대기 천막 / 가드 / VIP',file:'06_luce_boulevard_entrance.png',xy:[966,1036],dir:'북서',arrow:'↖',category:'BOULEVARD',desc:'곡면 발광 패널로 감싼 8층 LUCE 외관입니다. 입구 위 차양, 낮은 계단, 확인 데스크와 벨트 대기줄을 살펴보세요.',links:[3,1]}
+ {id:6,title:'루체 클럽 정문',sub:'대기 천막 / 가드 / VIP',file:'06_luce_boulevard_entrance.png',xy:[966,1036],dir:'북서',arrow:'↖',category:'BOULEVARD',desc:'곡면 발광 패널로 감싼 8층 LUCE 외관입니다. 평평하게 이어지는 대기줄과 출입구, 차양과 확인 데스크를 살펴보세요. 1층 내부는 복도 안쪽에서 계단으로 연결됩니다.',links:[3,1]}
 ];
 const $=id=>document.getElementById(id);
 let current=6, mode='street', zoom=1, pan={x:0,y:0}, fit={w:0,h:0}, toastTimer;
@@ -18,6 +18,7 @@ function urlState(){const h=new URLSearchParams(location.hash.slice(1));const id
 function go(id=current,nextMode='street',push=true){
  current=id;mode=nextMode;
  $('entranceDetail').hidden = current !== 6 || mode !== 'street';
+ $('interiorDetail').hidden = current !== 6 || mode !== 'street';
  if(push){const hash=`#view=${current}&mode=${mode}`;if(location.hash!==hash)history.pushState(null,'',hash);}
  const p=points.find(p=>p.id===current);
  document.querySelectorAll('[data-point]').forEach(el=>el.setAttribute('aria-current',String(Number(el.dataset.point)===current)));
