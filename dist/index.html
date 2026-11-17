@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#142522">
+  <meta name="description" content="루체 클럽과 연결된 골목, 공원, 빌라촌을 지도와 거리 이미지로 둘러보는 도심 블록 레퍼런스.">
+  <title>LUCE — 동네 거리뷰</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="app">
+  <aside id="sidebar" class="sidebar">
+    <a class="brand" href="#view=6&mode=street"><span class="brand-mark">L.</span><span>LUCE<span class="brand-sub">NEIGHBORHOOD ATLAS</span></span></a>
+    <div class="side-heading"><div><span class="eyebrow">도심 블록 레퍼런스</span><h1>골목을 따라,<br>동네를 둘러보세요.</h1></div><button id="closeSidebar" class="icon-button mobile-only" aria-label="장소 목록 닫기">×</button></div>
+    <label class="search"><span aria-hidden="true">⌕</span><input id="search" type="search" placeholder="장소 찾기" aria-label="장소 검색"><kbd>/</kbd></label>
+    <div class="list-heading"><span>둘러볼 장소</span><span id="count">6개 지점</span></div>
+    <nav id="places" aria-label="거리뷰 지점"></nav><p id="empty" hidden>일치하는 장소가 없습니다.</p>
+    <section class="mini-section"><div class="list-heading"><span>현재 위치</span><button id="expandMap" class="text-button">지도 크게 보기 ↗</button></div><div class="mini-map"><img src="assets/08_site_plan.png" alt="도심 블록 배치도"><div id="miniMarkers" class="markers"></div></div><div class="map-key"><span class="dot"></span>번호를 누르면 해당 거리로 이동</div></section>
+    <button id="infoButton" class="info-button">ⓘ 레퍼런스 안내</button>
+  </aside>
+  <button id="scrim" class="scrim" aria-label="장소 목록 닫기" hidden></button>
+  <main>
+    <header class="toolbar"><div class="breadcrumb"><button id="openSidebar" class="icon-button mobile-only" aria-label="장소 목록 열기">☰</button><span class="town">LUCE BLOCK</span><span class="slash">/</span><span id="breadcrumb">루체 클럽 정문</span></div><div class="toolbar-actions"><div class="mode-tabs" role="group" aria-label="보기 방식"><button data-mode="street" aria-pressed="true">거리뷰</button><button data-mode="plan" aria-pressed="false">배치도</button><button data-mode="satellite" aria-pressed="false">위성뷰</button></div><button id="fullscreen" class="icon-button" aria-label="전체 화면" title="전체 화면">⛶</button></div></header>
+    <section class="viewer" id="viewer" aria-label="거리뷰 이미지 탐색">
+      <div class="scene-heading"><span class="location-number" id="locationNumber">06</span><div><span class="eyebrow" id="sceneType">STREET REFERENCE</span><h2 id="sceneTitle">루체 클럽 정문</h2></div></div>
+      <div id="viewport" class="viewport" tabindex="0" aria-label="이미지. 확대 후 드래그해서 이동할 수 있습니다."><div id="imagePlane" class="image-plane"><img id="sceneImage" src="assets/06_luce_boulevard_entrance.png" alt="루체 클럽 정문과 일자 대기 천막, 가드 천막" draggable="false"><div id="largeMarkers" class="markers" hidden></div></div></div>
+      <div id="loading" class="loading" role="status" hidden>이미지 불러오는 중…</div><button id="retry" class="retry" hidden>이미지를 불러오지 못했습니다 · 다시 시도</button>
+      <div class="compass" id="compass" title="배치도 기준 시선 방향"><span>N</span><span id="compassArrow">↖</span><small id="direction">북서</small></div>
+      <div class="zoom-controls"><button id="zoomIn" aria-label="확대">+</button><span id="zoomValue">100%</span><button id="zoomOut" aria-label="축소">−</button><button id="resetZoom" aria-label="화면에 맞추기" title="화면에 맞추기">⌖</button></div>
+      <div class="viewer-hint" id="viewerHint">휠로 확대 · 드래그로 이동</div>
+      <nav id="connections" class="connections" aria-label="연결된 거리로 이동"></nav>
+    </section>
+    <section class="details"><div class="detail-copy"><div class="detail-top"><span class="eyebrow" id="detailCategory">BOULEVARD · 06</span><span class="ref-label">이미지 레퍼런스</span></div><p id="description">대로변 클럽 정문. 일자 대기 천막과 가드 부스, 측면 VIP 주차 진입을 확인하세요.</p></div><div class="detail-actions"><a id="download" href="assets/06_luce_boulevard_entrance.png" download>원본 저장 ↓</a><button id="copyLink">현재 위치 링크 ⤴</button></div></section>
+    <section class="filmstrip-section"><div class="filmstrip-heading"><span>동네 둘러보기</span><div><button id="previous" aria-label="이전 지점">←</button><span id="stepCount">6 / 6</span><button id="next" aria-label="다음 지점">→</button></div></div><nav id="filmstrip" class="filmstrip" aria-label="전체 거리뷰 이미지"></nav></section>
+    <footer><span>LUCE · URBAN REFERENCE</span><span>가상 도심 블록 / 이미지 기반 탐색</span></footer>
+  </main>
+</div>
+<dialog id="info"><button id="closeInfo" class="dialog-close icon-button" aria-label="안내 닫기">×</button><span class="eyebrow">ABOUT THIS ATLAS</span><h2>제작을 위한 거리뷰 레퍼런스</h2><p>생성한 거리 이미지 6장을 배치도의 위치와 연결했습니다. 지점 선택, 확대, 드래그로 외관과 골목 디테일을 살펴볼 수 있습니다.</p><p>실제 지도 서비스나 360° 파노라마는 아닙니다. 이미지마다 일부 건물 디테일이 다를 수 있으며, 건물 위치와 동선은 배치도를 기준으로 합니다.</p><p>경찰서·뼈해장국은 배치도에 표시되어 있으며 별도 거리 이미지는 아직 없습니다.</p><div class="keyboard-help"><span>← → 이전 / 다음 지점</span><span>+ − 확대 / 축소</span><span>0 화면에 맞추기</span><span>Esc 안내 / 목록 닫기</span></div></dialog>
+<div id="toast" class="toast" role="status" hidden></div>
+<script src="app.js"></script>
+</body></html>
